@@ -12,8 +12,15 @@ Input: [8, 3, 5, 2, 4, 6, 0, 1]
 Output: 7
  */
 $arr = [4, 0, 3, 1];
+
+//$max = max($arr);
+//echo ($max*($max+1)/2 - array_sum($arr)) . PHP_EOL;
+
 echo "get:" . findMissingNumber($arr) . ", want:2" . PHP_EOL;
 $arr = [8, 3, 5, 2, 4, 6, 0, 1];
+
+$max = max($arr);
+echo ($max*($max+1)/2 - array_sum($arr)) . PHP_EOL;
 //echo "get:" . findMissingNumbers($arr) . ", want:7" . PHP_EOL;
 
 
@@ -52,8 +59,6 @@ function findMissingNumber($arr) {
     }
 
     return -1;
-
-
 }
 
 function swap(&$arr, $i, $j) {

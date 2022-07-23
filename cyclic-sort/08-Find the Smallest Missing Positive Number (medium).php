@@ -18,11 +18,11 @@ Output: 4
 $arr = [-3, 1, 5, 4, 2];
 echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:3" . PHP_EOL;
 
-$arr = [3, -2, 0, 1, 2];
-echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:4" . PHP_EOL;
-
-$arr = [3, 2, 5, 1];
-echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:4" . PHP_EOL;
+//$arr = [3, -2, 0, 1, 2];
+//echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:4" . PHP_EOL;
+//
+//$arr = [3, 2, 5, 1];
+//echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:4" . PHP_EOL;
 
 
 
@@ -34,7 +34,7 @@ function findSmallestMissingPositiveNumber($arr) {
             swap($arr, $i, $arr[$i]-1);
         }
     }
-
+var_dump($arr);
     for ($i = 0; $i < count($arr); $i++) {
         if ($arr[$i] != $i+1) {
             return $i+1;

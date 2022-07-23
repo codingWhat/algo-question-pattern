@@ -22,15 +22,42 @@ $arr = [2, 4, 1, 2];
 echo "get:" . findAllMissingNumbers($arr) . ", want:3" . PHP_EOL;
 $arr = [2, 3, 2, 1];
 echo "get:" . findAllMissingNumbers($arr) . ", want:4" . PHP_EOL;
-
+//
 function findAllMissingNumbers($arr) {
+
+    for ($i = 0; $i < count($arr); $i++) {
+        $curId = $i;
+        $targetIdx = $arr[$i]-1;
+        while ($arr[$targetIdx] != $arr[$curId]) {
+            $tmp = $arr[$targetIdx];
+            $arr[$targetIdx] = $arr[$i];
+            $arr[$i] = $tmp;
+
+            $targetIdx = $arr[$curId]-1;
+        }
+    }
+
+   // var_dump($arr);
+
+    $res = [];
+    for ($i = 0; $i < count($arr); $i++) {
+        if (($i+1) != $arr[$i] ) {
+            $res[] = $i+1;
+        }
+    }
+
+    return implode(",", $res);
+
+}
+
+/*function findAllMissingNumbers($arr) {
 
      for ($i = 0; $i < count($arr); $i++) {
            $curIdx = $i;
            $curVal = $arr[$curIdx];
            $targetIdx = $curVal-1;
            $targetVal = $arr[$targetIdx];
-          // echo "curIdx:{$curIdx}, curVal:{$curVal}, targetIdx:{$targetIdx}, targetVal:{$targetVal}, arr:". json_encode($arr) . PHP_EOL;
+           echo "curIdx:{$curIdx}, curVal:{$curVal}, targetIdx:{$targetIdx}, targetVal:{$targetVal}, arr:". json_encode($arr) . PHP_EOL;
            if ($curVal != $targetVal) {
                swap($arr, $curIdx, $targetIdx);
            }
@@ -50,4 +77,4 @@ function swap (&$arr, $i, $j)  {
     $tmp = $arr[$i];
     $arr[$i] = $arr[$j];
     $arr[$j] = $tmp;
-}
+}*/

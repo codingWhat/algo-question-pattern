@@ -7,14 +7,14 @@
 1,3,4,5,6,7,8
  */
 
-$arr = [2,3];
-echo "get:" . findAllMissingNumbers($arr) . ", want:1" . PHP_EOL;
-$arr = [1,2,3,5];
-echo "get:" . findAllMissingNumbers($arr) . ", want:4" . PHP_EOL;
-$arr = [1,3,4,5,6,7,8];
-echo "get:" . findAllMissingNumbers($arr) . ", want:2" . PHP_EOL;
-$arr = [1,2,3];
-echo "get:" . findAllMissingNumbers($arr) . ", want:-1" . PHP_EOL;
+//$arr = [2,3];
+//echo "get:" . findAllMissingNumbers($arr) . ", want:1" . PHP_EOL;
+//$arr = [1,2,3,5];
+//echo "get:" . findAllMissingNumbers($arr) . ", want:4" . PHP_EOL;
+//$arr = [1,3,4,5,6,7,8];
+//echo "get:" . findAllMissingNumbers($arr) . ", want:2" . PHP_EOL;
+//$arr = [1,2,3];
+//echo "get:" . findAllMissingNumbers($arr) . ", want:-1" . PHP_EOL;
 $arr = [1,3,8];
 echo "get:" . findAllMissingNumbersAll($arr) . ", want:2,4,5,6,7" . PHP_EOL;
 $arr = [1,8];
