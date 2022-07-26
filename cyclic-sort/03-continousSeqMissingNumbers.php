@@ -7,18 +7,18 @@
 1,3,4,5,6,7,8
  */
 
-//$arr = [2,3];
-//echo "get:" . findAllMissingNumbers($arr) . ", want:1" . PHP_EOL;
-//$arr = [1,2,3,5];
-//echo "get:" . findAllMissingNumbers($arr) . ", want:4" . PHP_EOL;
+$arr = [2,3];
+echo "get:" . findAllMissingNumbers($arr) . ", want:1" . PHP_EOL;
+$arr = [1,2,3,5];
+echo "get:" . findAllMissingNumbers($arr) . ", want:4" . PHP_EOL;
 //$arr = [1,3,4,5,6,7,8];
 //echo "get:" . findAllMissingNumbers($arr) . ", want:2" . PHP_EOL;
 //$arr = [1,2,3];
 //echo "get:" . findAllMissingNumbers($arr) . ", want:-1" . PHP_EOL;
-$arr = [1,3,8];
-echo "get:" . findAllMissingNumbersAll($arr) . ", want:2,4,5,6,7" . PHP_EOL;
-$arr = [1,8];
-echo "get:" . findAllMissingNumbersAll($arr) . ", want:2,3,4,5,6,7" . PHP_EOL;
+//$arr = [1,3,8];
+//echo "get:" . findAllMissingNumbersAll($arr) . ", want:2,4,5,6,7" . PHP_EOL;
+//$arr = [1,8];
+//echo "get:" . findAllMissingNumbersAll($arr) . ", want:2,3,4,5,6,7" . PHP_EOL;
 function findAllMissingNumbers($arr) {
 //    for ($i = 0; $i < count($arr); $i++) {
 //        if ($i+1 != $arr[$i]) {
@@ -31,18 +31,32 @@ function findAllMissingNumbers($arr) {
     $left = 0;
     $right = count($arr)-1;
     while ($left < $right) {
-        $mid = $left+ intval(($right-$left)/2);
-        if ($arr[$mid] == $mid+1) {
-            $left = $mid+1;
-        } else {
+        $mid = $left + intval(($right-$left)/2);
+        if ($arr[$mid] > $mid+1 ) {
             $right = $mid;
+        } else {
+            $left = $mid + 1;
         }
     }
-    if ($arr[$left] != $left+1)  {
-        return $left+1;
-    } else {
-        return -1;
-    }
+
+    return $arr[$left]-1;
+
+
+//    $left = 0;
+//    $right = count($arr)-1;
+//    while ($left < $right) {
+//        $mid = $left+ intval(($right-$left)/2);
+//        if ($arr[$mid] == $mid+1) {
+//            $left = $mid+1;
+//        } else {
+//            $right = $mid;
+//        }
+//    }
+//    if ($arr[$left] != $left+1)  {
+//        return $left+1;
+//    } else {
+//        return -1;
+//    }
 }
 
 function findAllMissingNumbersAll($arr) {

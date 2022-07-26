@@ -1,5 +1,7 @@
 <?php
 /*
+
+leetcode 41
 Given an unsorted array containing numbers, find the smallest missing positive number in it.
 
 Example 1:
@@ -18,23 +20,28 @@ Output: 4
 $arr = [-3, 1, 5, 4, 2];
 echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:3" . PHP_EOL;
 
-//$arr = [3, -2, 0, 1, 2];
-//echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:4" . PHP_EOL;
-//
-//$arr = [3, 2, 5, 1];
-//echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:4" . PHP_EOL;
+$arr = [3, -2, 0, 1, 2];
+// [1,-2,0,3,2]
+// [-2,1,0,3,2]
+// [-2,1,0,3,2]
+// [0,1,-2,3,2]
+// [0,1,-2,3,2]
+// [0,1,2,3,-2]
+echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:4" . PHP_EOL;
 
+$arr = [3, 2, 5, 1];
+echo "get:" . findSmallestMissingPositiveNumber($arr) . "want:4" . PHP_EOL;
+//
 
 
 function findSmallestMissingPositiveNumber($arr) {
 
     for ($i = 0; $i < count($arr); $i++) {
-
-        while ($arr[$i] > 0 && $arr[$i] < count($arr) && $arr[$i] != $arr[$arr[$i]-1]) {
+        while ($arr[$i] >= 1 && $arr[$i] < count($arr) && $arr[$i] != $arr[$arr[$i]-1]) {
             swap($arr, $i, $arr[$i]-1);
         }
     }
-var_dump($arr);
+
     for ($i = 0; $i < count($arr); $i++) {
         if ($arr[$i] != $i+1) {
             return $i+1;

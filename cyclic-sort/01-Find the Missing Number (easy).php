@@ -11,7 +11,14 @@ Example 2:
 Input: [8, 3, 5, 2, 4, 6, 0, 1]
 Output: 7
  */
-$arr = [4, 0, 3, 1];
+
+
+$arr = [0, 2, 3, 1]; // 0+...n Sum
+
+echo "get:" . findMissingNumber($arr) . ", want:4" . PHP_EOL;
+
+$arr = [4, 0, 3, 1]; // 0+...n Sum
+
 
 //$max = max($arr);
 //echo ($max*($max+1)/2 - array_sum($arr)) . PHP_EOL;
@@ -22,7 +29,7 @@ $arr = [8, 3, 5, 2, 4, 6, 0, 1];
 $max = max($arr);
 echo ($max*($max+1)/2 - array_sum($arr)) . PHP_EOL;
 //echo "get:" . findMissingNumbers($arr) . ", want:7" . PHP_EOL;
-
+echo "get:" . findMissingNumber($arr) . ", want:7" . PHP_EOL;
 
 function findMissingNumber($arr) {
 //    //这种方式是以$i为基准去比较，
@@ -52,7 +59,7 @@ function findMissingNumber($arr) {
          }
     }
 
-    for ($i = 0; $i < count($arr); $i++) {
+    for ($i = 0; $i <= count($arr); $i++) {
         if ($arr[$i] != $i) {
             return $i;
         }
