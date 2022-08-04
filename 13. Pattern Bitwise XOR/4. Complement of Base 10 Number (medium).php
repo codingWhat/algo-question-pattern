@@ -19,3 +19,18 @@ Input: 10
 Output: 5
 Explanation: 10 is 1010 in binary, its complement is 0101 in binary, which is 5 in base-10.
  */
+
+$num = 10;
+var_dump(bitwiseComplement($num));
+function  bitwiseComplement($num) {
+    $bitCount = 0;
+    $n = $num;
+
+    while ($n > 0 ){
+        $bitCount++;
+        $n = $n >> 1;
+    }
+
+    $allSet = pow(2, $bitCount)-1;
+    return $num ^ $allSet;
+}

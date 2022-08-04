@@ -37,13 +37,38 @@ Output: [
   [0,0,0,1],
   [1,0,1,0]
 ]
-Explanation: First reverse each row: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]]. Then invert the image: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+
+Explanation: First reverse each row: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]].
+ Then invert the image: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
 
 Try it yourself #
 Try solving this question here
  */
 
+$arr = [
+    [1,1,0,0],
+    [1,0,0,1],
+    [0,1,1,1],
+    [1,0,1,0]
+];
 
-function  flipAndInvertImage($arr) {
+$arr = [
+    [1,0,1],
+    [1,1,1],
+    [0,1,1]
+];
 
+var_dump(flipAndInvertImage($arr));
+function  flipAndInvertImage($arrs) {
+
+    foreach ($arrs as $index => &$arr) {
+        for ($i = 0; $i < count($arr)/2; $i++) {
+            $tmp = $arr[$i] ^ 1;
+            $arr[$i] = $arr[count($arr)-$i-1]^1;
+            $arr[count($arr)-$i-1] = $tmp;
+        }
+    }
+
+
+    return $arrs;
 }

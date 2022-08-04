@@ -28,8 +28,10 @@ function findSingle($arr) {
 
    $num1 = 0;
    $num2 = 0;
-var_dump($b);
+  //0100
+    var_dump($b);
    foreach ($arr as $index => $item) {
+       echo "num1:{$num1},num2:{$num2}, item:{$item}, b:{$b}, item&b:" .($item & $b) .PHP_EOL;
         if (($item & $b) != 0) {
             $num1 ^= $item;
         } else {
