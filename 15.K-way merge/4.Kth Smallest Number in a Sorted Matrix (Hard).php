@@ -15,4 +15,4 @@ Explanation: The 5th smallest number in the matrix is 7.
  */
 
 
-// simillar with
+// similar with
