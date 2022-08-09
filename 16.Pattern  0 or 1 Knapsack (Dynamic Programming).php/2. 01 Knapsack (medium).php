@@ -1,7 +1,9 @@
 <?php
 /*
  Introduction #
-Given the weights and profits of ‘N’ items, we are asked to put these items in a knapsack which has a capacity ‘C’. The goal is to get the maximum profit out of the items in the knapsack. Each item can only be selected once, as we don’t have multiple quantities of any item.
+Given the weights and profits of ‘N’ items, we are asked to put these items in a knapsack which has a capacity ‘C’.
+The goal is to get the maximum profit out of the items in the knapsack. Each item can only be selected once,
+ as we don’t have multiple quantities of any item.
 
 Let’s take the example of Merry, who wants to carry some fruits in the knapsack to get maximum profit. Here are the weights and profits of the fruits:
 
@@ -20,7 +22,34 @@ Banana + Melon (total weight 5) => 10 profit
 This shows that Banana + Melon is the best combination as it gives us the maximum profit and the total weight does not exceed the capacity.
 
 Problem Statement #
-Given two integer arrays to represent weights and profits of ‘N’ items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number ‘C’. Each item can only be selected once, which means either we put an item in the knapsack or we skip it.
-
-
+Given two integer arrays to represent weights and profits of ‘N’ items,
+we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number ‘C’.
+ Each item can only be selected once, which means either we put an item in the knapsack or we skip it.
  */
+
+$profits = [1, 6, 10, 16];
+$weights = [1, 2, 3 ,5];
+$capacity = 7;
+
+var_dump(solveKnapsack($profits, $weights, $capacity));
+function  solveKnapsack($profits, $weights, $capacity) {
+    return helper($profits, $weights, $capacity, 0);
+}
+
+function helper($profits, $weights, $capacity, $curIdx) {
+
+    if ($curIdx == count($profits)) {
+        return 0 ;
+    }
+
+    //拿
+    $p1 = 0;
+    if ($weights[$curIdx]  <= $capacity) {
+        $p1 =  $profits[$curIdx] + helper($profits, $weights, $capacity-$weights[$curIdx],$curIdx+1);
+    }
+
+    //不拿
+   $p2 =  helper($profits, $weights, $capacity,$curIdx+1);
+
+    return  max($p1, $p2);
+}
