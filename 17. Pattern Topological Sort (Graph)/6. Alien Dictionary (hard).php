@@ -37,8 +37,12 @@ Explanation: From the given words we can conclude the following ordering among i
 
 From the above five points, we can conclude that the correct character order is: "ywxz"
  */
+//时间复杂度: O(V+E) //极端情况 O(N) 单次个数
+//空间复杂度: O(V+N) 所有字符的next和inDegree
 
 $words = ["ba", "bc", "ac", "cab"];
+//$words = ["ywx", "wz", "xww", "xz", "zyy", "zwz"];
+//$words = ["cab", "aaa", "aab"];
 var_dump(findOrderOfCharacter($words));
 function findOrderOfCharacter($words) {
 
@@ -51,5 +55,58 @@ function findOrderOfCharacter($words) {
         }
     }
 
-    var_dump($next, $inDegree);
+    for($i = 1; $i < count($words); $i++) {
+        $w1 = $words[$i-1];
+        $w2 = $words[$i];
+        $j = 0;
+        while ($j < min(strlen($w1), strlen($w2)))  {
+            $p = $w1[$j];
+            $s = $w2[$j];
+            if ($p != $s) {
+                $next[$p][] = $s;
+                $inDegree[$s]++;
+                break;
+            }
+            $j++;
+        }
+    }
+
+//    for ($i = 0; $i < count($words)-1; $i++) {
+//        $w1 = $words[$i];
+//        $w2 = $words[$i+1];
+//        for ($j = 0; $j < min(strlen($w1), strlen($w2)); $j++) {
+//            $p  = $w1[$j];
+//            $s = $w2[$j];
+//            if ($p != $s) {
+//                $next[$p][] = $s;
+//                $inDegree[$s]++;
+//                break;
+//            }
+//        }
+//    }
+
+    $queue = [];
+    foreach ($inDegree as $ch => $num) {
+        if ($num == 0) {
+            $queue[] = $ch;
+        }
+    }
+
+
+    $ret = "";
+    while (!empty($queue)) {
+        $ch = array_shift($queue);
+        $ret.= $ch;
+        if(!isset($next[$ch])) continue;
+        foreach ($next[$ch] as $index => $child) {
+            $inDegree[$child]--;
+            if ($inDegree[$child] == 0) {
+                $queue[] = $child;
+            }
+        }
+    }
+
+    if (strlen($ret) != count($inDegree)) return  "";
+
+    return $ret;
 }
