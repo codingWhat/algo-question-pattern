@@ -16,8 +16,17 @@ Explanation: Choosing '1' or '2' as roots give us MHTs. In the below diagram, we
 height of the trees with roots '1' or '2' is three which is minimum.
  */
 
+//时间复杂度：O(V) + O(E)
+//空间复杂度：O(V) + O(E)
 $vertices = 5;
 $edges = [[0, 1], [1, 2], [1, 3], [2, 4]];
+
+
+//$vertices = 4;
+//$edges = [[0, 1], [1, 2], [1, 3]];
+
+$vertices = 4;
+$edges = [[1,0],[1,2],[1,3]];
 
 var_dump(findMinimumHeightTree($vertices, $edges));
 function findMinimumHeightTree($vertices, $edges) {
@@ -45,42 +54,46 @@ function findMinimumHeightTree($vertices, $edges) {
         }
     }
 
-    $ret = [];
-    while ($vertices > 2) {
-        $size = count($queue);
-        $vertices -= $size;
+ //   var_dump($queue, $next);exit;
+//    $ret = [];
+//    while (!empty($queue)) {
+//            $size = count($queue);
+//            $ret=[];
+//            for ($i = 0; $i < $size; $i++) {
+//                echo  "queue:".json_encode($queue) . ", next:". json_encode($next).", indegree:". json_encode($inDegree) . PHP_EOL;
+//                $num = array_shift($queue);
+//                $ret []= $num;
+//                foreach ($next[$num] as $index => $child) {
+//                    $inDegree[$child]--;
+//                    if ($inDegree[$child] == 1) {
+//                        $queue[] = $child;
+//                    }
+//                }
+//            }
+//
+//    }
+//
+//    return $ret;
 
-        for ($i = 0; $i < $size; $i++) {
-            $num = array_shift($queue);
-            echo  "num:{$num}, next:". json_encode($next).", indegree:". json_encode($inDegree) . PHP_EOL;
-            foreach ($next[$num] as $index => $child) {
-                $inDegree[$child]--;
-                if ($inDegree[$child] == 1) {
-                    $queue[] = $child;
+
+
+    $total = $vertices;
+    while ($total > 2) { //为什么大于2，因为是偶数和单数节点关系，偶数节点最后剩2个，奇数节点个数最后剩1个
+
+             $size = count($queue);
+            $total -= $size;
+            for ($i = 0; $i < $size; $i++) {
+                echo  "queue:".json_encode($queue) . ", next:". json_encode($next).", indegree:". json_encode($inDegree) . PHP_EOL;
+                $num = array_shift($queue);
+                foreach ($next[$num] as $index => $child) {
+                    $inDegree[$child]--;
+                    if ($inDegree[$child] == 1) {
+                        $queue[] = $child;
+                    }
                 }
             }
-        }
+
     }
 
-    $ret[] = $queue;
-    return $ret;
-//    foreach ($inDegree as $item => $num) {
-//        $queue = [$item];
-//        var_dump(helper($queue, $inDegree, $next));
-//    }
-
+    return $queue;
 }
-
-//function helper($queue, $inDegree, $next) {
-//
-//    $height  = 1;
-//    while (!empty($queue)) {
-//        $item = array_shift($queue);
-//        foreach ($next[$item] as $index => $child) {
-//            $inDegree[$child]--;
-//            if ($inDegree[$child] == 0) {
-//                $queue[] = $child;
-//            }
-//        }
-//    }
-//}
