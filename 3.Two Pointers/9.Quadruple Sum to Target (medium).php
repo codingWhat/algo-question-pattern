@@ -21,9 +21,9 @@ $target = 1;
 var_dump(searchQuadruplets($arr, $target));*/
 
 
-//$arr = [2, 0, -1, 1, -2, 2];
-//$target = 2;
-//
+$arr = [2, 0, -1, 1, -2, 2];
+$target = 2;
+
 //var_dump(searchQuadruplets($arr, $target));
 
 $arr = [2,2,2,2,2];
@@ -60,13 +60,15 @@ function helper($arr, $left, $right, $target, $num) {
         $sum = $arr[$left] + $arr[$right];
         if ($sum > $target) {
             while ($right > 1 && $arr[$right]== $arr[$right-1]) $right--;
+            $right--;
         } else if ($sum < $target) {
             while ($left < $right-1 && $arr[$left]== $arr[$left+1]) $left++;
+            $left++;
         } else {
 
             $ret[] = [$arr[$left], $arr[$right]];
-            while ($left < $right-1 && $arr[$left]== $arr[$left+1]) $left++;
-            while ($right > 1 && $arr[$right]== $arr[$right-1]) $right--;
+            while ($left < $right && $arr[$left]== $arr[$left+1]) $left++;
+            while ($right > $left && $arr[$right]== $arr[$right-1]) $right--;
 
             $left++;
             $right--;

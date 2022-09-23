@@ -28,15 +28,53 @@ Example 1:
 // leetcode 295
 $c  = new CalculateMedian();
 
-//$arr = [1,6,4,2,8,7];
-$arr = [-1,-2,-3];
+$arr = [1,6,4,2,8,7];
+//$arr = [-1,-2,-3];
 //[1,2,4,] 6 [7,8,10]
-
+$c  = new CalculateMedianV1();
 foreach ($arr as $item) {
     $c->insert($item);
     echo $c->findMedian(). PHP_EOL;
 }
 //echo $c->findMedian();
+
+
+class CalculateMedianV1 {
+
+    public $maxHeap;
+    public $minHeap;
+
+    public function __construct()
+    {
+        $this->maxHeap = new SplMaxHeap();
+        $this->minHeap  = new SplMinHeap();
+    }
+
+    public function insert($num)
+    {
+        if ($this->maxHeap->isEmpty() || $num <= $this->maxHeap->top()) {
+            $this->maxHeap->insert($num);
+        } else {
+            $this->minHeap->insert($num);
+        }
+
+        if ($this->maxHeap->count() > $this->minHeap->count()+1) {
+            $this->minHeap->insert($this->maxHeap->extract());
+        } else if ($this->minHeap->count() > $this->maxHeap->count()) {
+            $this->maxHeap->insert($this->minHeap->extract());
+        }
+    }
+
+    public function findMedian()
+    {
+        if ($this->minHeap->count() == $this->maxHeap->count()) {
+            return  round(($this->minHeap->top() + $this->maxHeap->top())/2, 2);
+        }
+
+        return $this->maxHeap->top();
+    }
+}
+
 
 
 class CalculateMedian {

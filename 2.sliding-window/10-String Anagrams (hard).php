@@ -36,6 +36,9 @@ $str = "abbcabc";
 $p = "abc";
 var_dump(isAnagrams($str, $p));
 
+$str = "bcdcbabc";
+$p = "bc";
+var_dump(isAnagrams($str, $p));
 function isAnagrams($str, $p): array
 {
 
@@ -50,6 +53,7 @@ function isAnagrams($str, $p): array
     $right = 0;
     $window = [];
     $match = 0;
+    $tmp = [];
     while ($right <  strlen($str)) {
         $cur = $str[$right];
         if (isset($need[$cur])) {
@@ -65,11 +69,11 @@ function isAnagrams($str, $p): array
 
             if (($right-$left+1) == strlen($p)) {
 
-                $tmp = [];
-                for ($i = $left; $i <= $right; $i++) {
-                    $tmp[] = $i;
-                }
-                return $tmp;
+                $tmp[] = $left;
+//                for ($i = $left; $i <= $right; $i++) {
+//                    $tmp[] = $i;
+//                }
+              //  return $tmp;
             }
 
             $leftItem = $str[$left];
@@ -86,5 +90,5 @@ function isAnagrams($str, $p): array
         $right++;
     }
 
-    return [];
+    return $tmp;
 }

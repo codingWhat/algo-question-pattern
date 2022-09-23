@@ -32,11 +32,52 @@ $str = "cbebi";
 $k = 3;
 echo "get:" . getMaxLenStr($str, $k) . ", want:4" . PHP_EOL;
 
+$str = "araaci";
+$k =2;
+var_dump(getMaxLenStrV1($str, $k));
+$str = "araaci";
+$k = 1;
+var_dump(getMaxLenStrV1($str, $k));
+$str = "cbbebi";
+$k = 3;
+var_dump(getMaxLenStrV1($str, $k));
+$str = "cbebi";
+$k = 3;
+var_dump(getMaxLenStrV1($str, $k));
+
+
+function getMaxLenStrV1($str, $k) {
+    $stat = [];
+    $left = 0;
+    $right = 0;
+    $maxLen = PHP_INT_MIN;
+    while ($right < strlen($str)) {
+        $cur = $str[$right];
+        !isset($stat[$cur]) && $stat[$cur]=0;
+        $stat[$cur]++;
+
+        while (count($stat) > $k) {
+            $leftCh = $str[$left];
+            $stat[$leftCh]--;
+            if ($stat[$leftCh] == 0 ){
+                unset($stat[$leftCh]);
+            }
+            $left++;
+        }
+
+        $maxLen = max($maxLen, $right-$left+1);
+        $right++;
+    }
+
+    return $maxLen;
+}
+
 function getMaxLenStr($str, $k) {
     $match = [];
     $start = 0;
     $maxLen = 0;
     for ($end = 0; $end < strlen($str); $end++) {
+        !isset($match[$str[$end]]) && $match[$str[$end]]=0;
         $match[$str[$end]]++;
 
         if (count($match) == $k) {

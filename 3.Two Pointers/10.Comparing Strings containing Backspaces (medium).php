@@ -25,9 +25,9 @@ Input: str1="xywrrmp", str2="xywrrmu#p"
 Output: true
 Explanation: After applying backspaces the strings become "xywrrmp" and "xywrrmp" respectively.
  */
-//$str1 = "xy#z";
-//$str2 = "xzz#";
-//var_dump(backspaceCompare($str1, $str2));
+$str1 = "xy#z";
+$str2 = "xzz#";
+var_dump(backspaceCompare($str1, $str2));
 
 //时间复杂度: O(n) + O(s)
 //空间复杂度: O(1)

@@ -31,6 +31,43 @@ echo "get:" . getLongestUniqStr ($str) . ", want:b-1" . PHP_EOL;
 $str = "tmmzuxt";
 echo "get:" . getLongestUniqStr ($str) . ", want:mzux-5" . PHP_EOL;
 
+$str = "aabccbb";
+var_dump(getLongestUniqStrV1($str));
+
+$str = "abbbb";
+var_dump(getLongestUniqStrV1($str));
+
+$str = "abccde";
+var_dump(getLongestUniqStrV1($str));
+
+$str = "bbbb";
+var_dump(getLongestUniqStrV1($str));
+
+$str = "tmmzuxt";
+var_dump(getLongestUniqStrV1($str));
+function getLongestUniqStrV1($str) {
+    $left = 0;
+    $right = 0;
+
+    $stat = [];
+    $res = PHP_INT_MIN;
+    while ($right < strlen($str)) {
+        $cur = $str[$right];
+
+        while (isset($stat[$cur])) {
+            $leftCh = $str[$left];
+            unset($stat[$leftCh]);
+            $left++;
+        }
+
+        $res = max($res, $right-$left+1);
+        $stat[$cur] = $right;
+        $right++;
+    }
+
+    return $res;
+}
+
 function getLongestUniqStr ($str) {
 
     $posCount = [];

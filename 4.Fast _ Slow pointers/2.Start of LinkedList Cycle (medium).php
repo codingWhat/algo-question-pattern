@@ -26,9 +26,53 @@ $head->next->next->next->next->next = new Node(6);
 
 $head->next->next->next->next->next->next = $head->next->next;
 var_dump(findCircleStart($head)->val);
-//
+
+var_dump(findCircleStartV1($head)->val);
+
 $head->next->next->next->next->next->next = $head->next->next->next;
 var_dump(findCircleStart($head)->val);
+var_dump(findCircleStartV1($head)->val);
+
+function findCircleStartV1($head) {
+
+    $slow = $fast = $head;
+
+    $circleLen = 0;
+    while ($fast && $fast->next) {
+        $slow = $slow->next;
+        $fast = $fast->next->next;
+
+        if ($slow == $fast) {
+            $circleLen  = calculateCircleLength($slow);
+            break;
+        }
+    }
+
+
+    $p1 = $p2 = $head;
+    while ($circleLen > 0) {
+        $circleLen--;
+        $p2 = $p2->next;
+    }
+
+    while ($p1 != $p2) {
+        $p2 = $p2->next;
+        $p1 = $p1->next;
+    }
+
+
+    return $p1;
+}
+
+function calculateCircleLength($node) {
+    $len = 0;
+    $cur = $node;
+    do {
+        $cur = $cur->next;
+        $len++;
+    } while($cur != $node);
+    return $len;
+}
 
 function findCircleStart($node) {
 

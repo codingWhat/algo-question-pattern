@@ -32,7 +32,7 @@ function search($arr, $target) {
 
     while ($left < $right) {
         $sum = $arr[$left] + $arr[$right];
-        if ($sum == $target ) {
+        if ($sum == $target) {
             return [$left, $right];
         }else if ($sum > $target) {
             $right--;

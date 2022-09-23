@@ -68,13 +68,13 @@ function reverseAlternate($head, $k){
     $nextStart = $ending;
     for ($i = 1; $i < $k; $i++) {
          if (!$nextStart) {
-            return $prev;
+            return $end;
         }
         $nextStart = $nextStart->next;
     }
 
     if (!$nextStart || !$nextStart->next) {
-        return  $prev;
+        return  $end;
     }
 
 

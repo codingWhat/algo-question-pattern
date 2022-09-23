@@ -21,8 +21,8 @@ Explanation: There are two unique triplets whose sum is equal to zero.
 $arr = [-3, 0, 1, 2, -1, 1, -2];
 var_dump(searchTriplets($arr));
 
-$arr = [-5, 2, -1, -2, 3];
-var_dump(searchTriplets($arr));
+//$arr = [-5, 2, -1, -2, 3];
+//var_dump(searchTriplets($arr));
 
 function searchTriplets($arr) {
 

@@ -9,8 +9,8 @@ Example 1:
 
 Input: [1, 0, 2, 1, 0]
 Output: [0 0 1 1 2]
-Example 2:
 
+Example 2:
 Input: [2, 2, 0, 1, 2, 0]
 Output: [0 0 1 2 2 2 ]
  */
@@ -22,8 +22,40 @@ $arr = [2, 2, 0, 1, 2, 0];
 //var_dump($arr);
 
 
-sortK($arr);
-var_dump($arr);
+//sortK($arr);
+var_dump(sortV($arr));
+function sortV($arr) {
+ //1. 划分空间 [left, right]
+ /*
+  [left, i)
+  [i, j)
+  (k, right]
+  */
+  //2. 赋初始值
+ /*
+  i = left;
+  j = left;
+  k = right+1;
+  */
+  $i = 0;
+  $j = 0;
+  $k = count($arr)-1;
+
+  while ($j <= $k) {
+      if ($arr[$j] == 0) {
+          swap($arr, $i, $j);
+          $i++;
+          $j++;
+      } else if ($arr[$j] == 1) {
+          $j++;
+      } else {
+          swap($arr, $k, $j);
+          $k--;
+      }
+  }
+  return $arr;
+}
+
 function sortK(&$arr) {
 
     //使用三路快排
