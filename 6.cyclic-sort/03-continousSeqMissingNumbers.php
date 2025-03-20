@@ -8,6 +8,7 @@
  */
 
 $arr = [2,3];
+$arr = [4,7,9];
 echo "get:" . findAllMissingNumbers($arr) . ", want:1" . PHP_EOL;
 $arr = [1,2,3,5];
 echo "get:" . findAllMissingNumbers($arr) . ", want:4" . PHP_EOL;

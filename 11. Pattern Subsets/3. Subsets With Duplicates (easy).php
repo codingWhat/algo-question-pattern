@@ -22,6 +22,7 @@ Output: [], [1], [5], [3], [1,5], [1,3], [5,3], [1,5,3], [3,3], [1,3,3], [3,3,5]
 
 $arr = [1, 2, 2];
 $arr = [1,1,2,2];
+$arr = [1, 3, 3];
 var_dump(findSubsets($arr));
 
 
@@ -43,9 +44,8 @@ function helper($arr, $start, $path, &$res) {
 
     for ($i = $start; $i < count($arr); $i++) {
 
-        while ($i > $start && $i < count($arr) &&$arr[$i] == $arr[$i-1]) $i++;
+        if ($i > $start &&$arr[$i] == $arr[$i-1]) continue;
 
-        if ($i == count($arr)) break;
         $path[] = $arr[$i];
         $res[] = $path;
         helper($arr, $i+1, $path, $res);

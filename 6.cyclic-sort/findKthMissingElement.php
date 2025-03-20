@@ -12,7 +12,7 @@ Input: arr = [1,2,3,4], k = 2
 Output: 6
 Explanation: The missing positive integers are [5,6,7,...]. The 2nd missing positive integer is 6.
  */
-$arr = [2,3,4,7,11];
+/*$arr = [2,3,4,7,11];
 $k = 5;
 echo findKthPositive($arr, $k) . PHP_EOL;
 $arr = [1,2,3,4];
@@ -20,7 +20,43 @@ $k = 2;
 echo findKthPositive($arr, $k). PHP_EOL;
 $arr = [1,4];
 $k = 1;
-echo findKthPositive($arr, $k). PHP_EOL;
+echo findKthPositive($arr, $k). PHP_EOL;*/
+
+
+$arr = [4,7,9,11];
+//$arr = [4,5,6];
+$k = 2;
+
+echo findKthPositiveV1($arr, $k) . PHP_EOL;
+
+function findKthPositiveV1($arr, $k) {
+    $left = 0;
+    $len = count($arr);
+    $right = $len-1;
+
+    $idx = $arr[$right]-$arr[0]-$right;
+    if ($idx < $k) {
+        return $arr[$right] + $k;
+    }
+
+    //4,7,10
+    while ($left < $right) {
+        $mid = $left + intval(($right-$left)/2);
+        $idx = $arr[$mid]-$arr[0]-$mid; //关键逻辑-arr[0] 才能得出当前元素缺失的个数
+        if ($idx < $k) {
+            $left = $mid+1;
+        } else {
+            $right = $mid;
+        }
+     }
+    // $k - $arr[0]-$left+1
+//     return $arr[$left-1]+($k-($arr[$left-1]-$arr[0]-($left-1)));
+    //arr[left-1] + $k - arr[left-1]+ arr[0]+left-1;/
+    return $arr[0] + $k+$left-1;
+  //   return $arr[$left-1]+($k-($arr[$left-1]-$arr[0]-($left-1)));
+}
+
+echo findKthPositive($arr, $k) . PHP_EOL;
 
 function findKthPositive($arr, $k) {
 

@@ -6,6 +6,9 @@
  */
 class MinHeap {
 
+    public $count;
+    public $container;
+
     public function __construct()
     {
         $this->count = 0;
@@ -64,7 +67,7 @@ class MinHeap {
         $min = $k;
 
         $l = 2 * $k;
-        $r = 2 *$k +1;
+        $r = 2 * $k +1;
 
         if ($l < $this->count && $this->container[$min]  > $this->container[$l]) {
             $min = $l;

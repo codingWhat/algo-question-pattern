@@ -24,17 +24,21 @@ function makeSquares($arr) {
         $left = 0;
         $right = count($arr)-1;
         $ret = [];
+        $k = count($arr)-1;
         while ($left <= $right) {
             $l = $arr[$left]*$arr[$left];
             $r = $arr[$right]* $arr[$right];
 
             if ($l >= $r) {
-                array_unshift($ret, $l);
+                $ret[$k] = $l;
+                //array_unshift($ret, $l);
                 $left++;
             } else {
-                array_unshift($ret, $r);
+                $ret[$k] = $r;
+                //array_unshift($ret, $r);
                 $right--;
             }
+            $k--;
         }
 
         return $ret;
